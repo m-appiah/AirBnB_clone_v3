@@ -97,4 +97,4 @@ class DBStorage:
             all_provided_inst = self.all(cls)
             return len(all_provided_inst)
         if cls not in classes.value():
-            return None           
+            return None
