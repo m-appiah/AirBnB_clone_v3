@@ -148,6 +148,5 @@ class TestDBStorage(unittest.TestCase):
         storage.save()
         initial_count = storage.count(State)
         self.assertEqual(initial_count, len(storage.all(State)))
-
         total_count = storage.count(City)
         self.assertEqual(total_count, len(storage.all(City)))
