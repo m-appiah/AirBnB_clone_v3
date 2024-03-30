@@ -24,7 +24,8 @@ def state_get(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route(
+        '/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def state_delete(state_id):
     """delete a state"""
     state = storage.get("State", state_id)
