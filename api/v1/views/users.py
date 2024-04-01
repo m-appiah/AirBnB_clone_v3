@@ -9,7 +9,7 @@ from api.v1.views import app_views
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_users():
-    """Get all users
+    """Get all users.    
     Returns:
         JSON -- List of all users.
     """

@@ -8,7 +8,10 @@ from flask import jsonify, abort, make_response, request
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
-    """get states"""
+    """get all states.
+    Returns:
+        JSON -- List of all
+    """
     states = []
     for state in storage.all("State").values():
         states.append(state.to_dict())
@@ -17,7 +20,12 @@ def states():
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def state_get(state_id):
-    """get state by id"""
+    """get state by id
+    Arguments:
+        state_id {str} -- state id
+    Returns:
+        JSON -- state data
+    """
     state = storage.get("State", state_id)
     if state is None:
         abort(404)
@@ -27,7 +35,12 @@ def state_get(state_id):
 @app_views.route(
         '/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def state_delete(state_id):
-    """delete a state"""
+    """delete a state by id
+    Arguments:
+        state_id {str} -- state id
+    Returns:
+        JSON -- Empty dictionary with status code 200.
+    """
     state = storage.get("State", state_id)
     if state is None:
         abort(404)
@@ -38,7 +51,10 @@ def state_delete(state_id):
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def state_post():
-    """create a state"""
+    """create a new state
+    Returns:
+        JSON -- New state data.
+    """
     if request.get_json() is None:
         abort(400, 'Not a JSON')
     if 'name' not in request.get_json():
@@ -50,7 +66,12 @@ def state_post():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def state_put(state_id):
-    """update a state"""
+    """Update a state.
+    Arguments:
+        state_id {str} -- state id
+    Returns:
+        JSON -- state data
+    """
     state = storage.get("State", state_id)
     if state is None:
         abort(404)
