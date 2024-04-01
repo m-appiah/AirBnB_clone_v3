@@ -9,7 +9,8 @@ from api.v1.views import app_views
 from os import getenv
 
 
-@app_views.route('/places/<place_id>/amenities', methods=['GET'], strict_slashes=False)
+@app_views.route(
+        '/places/<place_id>/amenities', methods=['GET'], strict_slashes=False)
 def get_place_amenities(place_id):
     """Get all amenities of a place.
     Returns:
@@ -21,11 +22,14 @@ def get_place_amenities(place_id):
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         amenities = [amenity.to_dict() for amenity in place.amenities]
     else:
-        amenities = [storage.get(Amenity, amenity_id).to_dict() for amenity_id in place.amenity_ids]
+        amenities = [storage.get(
+            Amenity, amenity_id).to_dict() for amenity_id in place.amenity_ids]
     return jsonify(amenities)
 
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities/<amenity_id>',
+                 methods=['DELETE'],
+                 strict_slashes=False)
 def delete_place_amenity(place_id, amenity_id):
     """Delete a specific amenity of a place.
     Returns:
@@ -49,9 +53,11 @@ def delete_place_amenity(place_id, amenity_id):
     return jsonify({}), 200
 
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'], strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities/<amenity_id>',
+                 methods=['POST'],
+                 strict_slashes=False)
 def link_place_amenity(place_id, amenity_id):
-    """Link a amenity to a place.    
+    """Link a amenity to a place.
     Returns:
         JSON -- New amenity data.
     """
