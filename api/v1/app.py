@@ -3,6 +3,7 @@
 from flask import Flask, Blueprint, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
@@ -18,6 +19,8 @@ def teardown_appcontext(exception):
 @app.errorhandler(404)
 def not_found(e):
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
 if __name__ == "__main__":
