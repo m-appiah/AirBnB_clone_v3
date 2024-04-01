@@ -7,13 +7,19 @@ from models import storage
 
 @app_views.route('/status', strict_slashes=False)
 def status():
-    """status"""
+    """Returns the status of the API.
+    Returns:
+        JSON -- Status of the API.
+    """
     return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats', strict_slashes=False)
 def stats():
-    """stats"""
+    """Returns the count of all objects by type.
+    Returns:
+        JSON -- Dictionary with the count of all objects by type.
+    """
     countDict = {}
     fields = {
         "amenities": "Amenity",
