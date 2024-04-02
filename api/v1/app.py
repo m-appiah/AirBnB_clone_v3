@@ -20,6 +20,7 @@ def teardown_appcontext(exception):
 def not_found(e):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
+
 CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
