@@ -103,7 +103,7 @@ def update_place(place_id):
 
 @app_views.route('/places_search', methods=['POST'], strict_slashes=False)
 def search_places():
-    """Search for places.    
+    """Search for places.
     Returns:
         JSON -- List of places.
     """
@@ -129,5 +129,6 @@ def search_places():
                     if place.to_dict() not in places:
                         places.append(place.to_dict())
         if amenities:
-            places = [place for place in places if all(amenity in place['amenities'] for amenity in amenities)]
+            places = [place for place in places if all(
+                amenity in place['amenities'] for amenity in amenities)]
     return jsonify(places)
