@@ -1,26 +1,13 @@
 #!/usr/bin/python3
 """Index"""
 from api.v1.views import app_views
-from flask import jsonify
+from flask import Flask, jsonify
 from models import storage
 
 
-@app_views.route('/status', strict_slashes=False)
-def status():
-    """Returns the status of the API.
-    Returns:
-        JSON -- Status of the API.
-    """
-    return jsonify({"status": "OK"})
-
-
-@app_views.route('/stats', strict_slashes=False)
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
-    """Returns the count of all objects by type.
-    Returns:
-        JSON -- Dictionary with the count of all objects by type.
-    """
-    countDict = {}
+    """Retrieves the number of each objects by type"""
     fields = {
         "amenities": "Amenity",
         "cities": "City",
@@ -29,6 +16,7 @@ def stats():
         "states": "State",
         "users": "User"
     }
+    countDict = {}
     for k, v in fields.items():
         countDict[k] = storage.count(v)
     return jsonify(countDict)
